@@ -1,0 +1,14 @@
+int findSpecialInteger(List<int> arr) {
+final freq = (0.25 * arr.length).floor();
+final counter = {};
+
+for (final num in arr) {
+counter[num] = (counter[num] ?? 0) + 1;
+
+if (counter[num]! > freq) {
+  return num;
+}
+
+}
+return arr[0];
+}
