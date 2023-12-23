@@ -1,0 +1,35 @@
+class Solution {
+List<bool> camelMatch(List<String> queries, String pattern) {
+bool check(String s, String t) {
+int m = s.length;
+int n = t.length;
+int i = 0;
+int j = 0;
+
+```
+  while (j < n) {
+    while (i < m && s[i] != t[j] && s[i].toLowerCase() == s[i]) {
+      i++;
+    }
+
+    if (i == m || s[i] != t[j]) {
+      return false;
+    }
+
+    i++;
+    j++;
+  }
+
+  while (i < m && s[i].toLowerCase() == s[i]) {
+    i++;
+  }
+
+  return i == m;
+}
+
+return queries.map((q) => check(q, pattern)).toList();
+
+```
+
+}
+}
