@@ -1,0 +1,43 @@
+class Solution {
+  int myAtoi(String s) {
+    if (s.isEmpty) {
+      return 0;
+    }
+    int n = s.length;
+    if (n == 0) {
+      return 0;
+    }
+    int i = 0;
+    while (s[i] == ' ') {
+      i++;
+      // only contains blank space
+      if (i == n) {
+        return 0;
+      }
+    }
+    int sign = (s[i] == '-') ? -1 : 1;
+    if (s[i] == '-' || s[i] == '+') {
+      i++;
+    }
+    int res = 0;
+    int flag = (2.pow(31) - 1) ~/ 10;
+    while (i < n) {
+      // not a number, exit the loop
+      if (!isDigit(s[i])) {
+        break;
+      }
+      int c = int.parse(s[i]);
+      // if overflows
+      if (res > flag || (res == flag && c > 7)) {
+        return (sign > 0) ? (2.pow(31) - 1) : -(2.pow(31));
+      }
+      res = res * 10 + c;
+      i++;
+    }
+    return sign * res;
+  }
+
+  bool isDigit(String s) {
+    return RegExp(r'\d').hasMatch(s);
+  }
+}
